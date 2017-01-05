@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="fdevscom_apiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="APIKeys">
+          <Key>
+            <PropertyRef Name="APIKeyId" />
+          </Key>
+          <Property Name="APIKeyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="APIKey" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ToDoItemDetails">
+          <Key>
+            <PropertyRef Name="ToDoItemDetailId" />
+          </Key>
+          <Property Name="ToDoItemDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ToDoItemId" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="smalldatetime" Nullable="false" />
+          <Property Name="DateDue" Type="smalldatetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ToDoItems">
+          <Key>
+            <PropertyRef Name="ToDoItemId" />
+          </Key>
+          <Property Name="ToDoItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ToDoItem" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsCompleted" Type="bit" />
+          <Property Name="IsArchived" Type="bit" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="fdevscom_apiModelStoreContainer">
+          <EntitySet Name="APIKeys" EntityType="Self.APIKeys" Schema="fdevscom_api" store:Type="Tables" />
+          <EntitySet Name="ToDoItemDetails" EntityType="Self.ToDoItemDetails" Schema="fdevscom_api" store:Type="Tables" />
+          <EntitySet Name="ToDoItems" EntityType="Self.ToDoItems" Schema="fdevscom_api" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="fdevscom_api" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="fdevscom_apiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="fdevscom_apiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="APIKeys" EntityType="fdevscom_apiModel.APIKeys" />
+          <EntitySet Name="Users" EntityType="fdevscom_apiModel.Users" />
+          <EntitySet Name="ToDoItems" EntityType="fdevscom_apiModel.ToDoItems" />
+          <EntitySet Name="ToDoItemDetails" EntityType="fdevscom_apiModel.ToDoItemDetails" />
+        </EntityContainer>
+        <EntityType Name="APIKeys">
+          <Key>
+            <PropertyRef Name="APIKeyId" />
+          </Key>
+          <Property Name="APIKeyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APIKey" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ToDoItems">
+          <Key>
+            <PropertyRef Name="ToDoItemId" />
+          </Key>
+          <Property Name="ToDoItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ToDoItem" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsCompleted" Type="Boolean" />
+          <Property Name="IsArchived" Type="Boolean" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ToDoItemDetails">
+          <Key>
+            <PropertyRef Name="ToDoItemDetailId" />
+          </Key>
+          <Property Name="ToDoItemDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ToDoItemId" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateDue" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="fdevscom_apiModelStoreContainer" CdmEntityContainer="fdevscom_apiEntities">
+          <EntitySetMapping Name="APIKeys">
+            <EntityTypeMapping TypeName="fdevscom_apiModel.APIKeys">
+              <MappingFragment StoreEntitySet="APIKeys">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="APIKey" ColumnName="APIKey" />
+                <ScalarProperty Name="APIKeyId" ColumnName="APIKeyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="fdevscom_apiModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToDoItems">
+            <EntityTypeMapping TypeName="fdevscom_apiModel.ToDoItems">
+              <MappingFragment StoreEntitySet="ToDoItems">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="ToDoItem" ColumnName="ToDoItem" />
+                <ScalarProperty Name="ToDoItemId" ColumnName="ToDoItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToDoItemDetails">
+            <EntityTypeMapping TypeName="fdevscom_apiModel.ToDoItemDetails">
+              <MappingFragment StoreEntitySet="ToDoItemDetails">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ToDoItemId" ColumnName="ToDoItemId" />
+                <ScalarProperty Name="ToDoItemDetailId" ColumnName="ToDoItemDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
